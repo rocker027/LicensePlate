@@ -21,6 +21,8 @@ public class RandomNumberHandler {
     int[] lucky_array = {
             1, 3, 5, 6, 7, 8, 11, 13, 15, 16, 17, 18, 21, 23, 24, 25, 28, 31, 32, 38, 40, 44, 46, 47, 51, 56, 62, 64, 66, 67, 70, 72, 80
     };
+
+    int[] custom_number = {1, 3, 5, 6, 7, 8, 11, 13,15, 16, 17, 18, 21, 23};
     private Context mContext;
     private HashMap<Integer, LicensePlateVO> mResults;
 
@@ -48,15 +50,16 @@ public class RandomNumberHandler {
     public HashMap<Integer, LicensePlateVO> getRandomNumbers(int divination) {
         mResults.clear();
         Integer rnd = 0;
-        while (mResults.size() < 10)       //while迴圈命名rndFnc，當rnd >0執行下列迴圈
+        while (mResults.size() < 50)       //while迴圈命名rndFnc，當rnd >0執行下列迴圈
         {
             rnd = (int) (Math.floor(Math.random() * 9999 + 0001));
-            Log.d("rnd", rnd.toString());
+//            Log.d("rnd", rnd.toString());
             if (!isNumberIs4(rnd)) {
-                Log.d("rnd no 4", rnd.toString());
+//                Log.d("rnd no 4", rnd.toString());
                 if (isLucky(getSelectDivination(divination, rnd))) {
 //                    result_list.add(getSelectDivination(divination, rnd));
                     LicensePlateVO licensePlate = new LicensePlateVO(rnd, getSelectDivination(divination, rnd));
+                    Log.d("result", "車牌 : "+rnd.toString() +" , 計算結果 ：" + getSelectDivination(divination, rnd));
                     mResults.put(licensePlate.getLicensePlate(), licensePlate);
                 }
             }
@@ -80,7 +83,8 @@ public class RandomNumberHandler {
     }
 
     private boolean isLucky(Integer random_number) {
-        for (int i : lucky_array) {
+//        for (int i : lucky_array) {
+        for (int i : custom_number) {
             if (i == random_number) {
                 return true;
             }
