@@ -50,11 +50,11 @@ public class RandomNumberHandler {
     public HashMap<Integer, LicensePlateVO> getRandomNumbers(int divination) {
         mResults.clear();
         Integer rnd = 0;
-        while (mResults.size() < 50)       //while迴圈命名rndFnc，當rnd >0執行下列迴圈
+        while (mResults.size() < 100)       //while迴圈命名rndFnc，當rnd >0執行下列迴圈
         {
             rnd = (int) (Math.floor(Math.random() * 9999 + 0001));
 //            Log.d("rnd", rnd.toString());
-            if (!isNumberIs4(rnd)) {
+            if (!isNumberIs4(rnd) && !isNumberIs7(rnd)) {
 //                Log.d("rnd no 4", rnd.toString());
                 if (isLucky(getSelectDivination(divination, rnd))) {
 //                    result_list.add(getSelectDivination(divination, rnd));
@@ -76,6 +76,20 @@ public class RandomNumberHandler {
         } else if ((((random_number % 1000) % 100) / 10) == 4) {
             return true;
         } else if ((random_number % 10) == 4) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isNumberIs7(Integer random_number) {
+        if ((random_number / 1000) == 7) {
+            return true;
+        } else if (((random_number % 1000) / 100) == 7) {
+            return true;
+        } else if ((((random_number % 1000) % 100) / 10) == 7) {
+            return true;
+        } else if ((random_number % 10) == 7) {
             return true;
         } else {
             return false;
